@@ -1,0 +1,46 @@
+---
+layout: runbook
+title: '#4471 · what the merge holds'
+owner: Oleksandr Gogilchyn
+status: open
+reviewed: 2026-11-24
+signature: 'v1.eyJzdWIiOiI2MjAwIiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTU1MzQ4NzEsImV4cCI6MTc5NTYyMTI3MX0.cDOlrwgF8NkIuIMA8HelirpdCoZQLcNv83niYU7N27c'
+---
+
+<script>
+  import CauseTable from '#lib/kb/CauseTable.svelte';
+  import QueueTimeline from '#lib/kb/QueueTimeline.svelte';
+  import Callout from '#lib/kb/Callout.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+
+  const signature =
+    'v1.eyJzdWIiOiI2MjAwIiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTU1MzQ4NzEsImV4cCI6MTc5NTYyMTI3MX0.cDOlrwgF8NkIuIMA8HelirpdCoZQLcNv83niYU7N27c';
+</script>
+
+[#4471](/kb/incidents/4471) was marked known: one bug, one fix queued. The reports were merged by subject line ([decision 0001](/kb/decisions/0001-dedupe-by-subject)), so the bodies were not what decided the merge. The table below groups those reports by cause. The cause with the most reports is this ticket. Any other cause was merged into the wrong place and has no ticket of its own.
+
+## What was merged
+
+<CauseTable ticket={4471} />
+
+## Two problems
+
+**parser.** The shared parser reads every date month first. A day-first tenant's date comes back with the day and the month swapped. That is the cause this ticket actually is. The queued fix is for this cause.
+
+The table footnotes a few of those reports. The desk read them as a one-day move (`desk-notes.json`), not a month swap: a June-only shift, the same meeting on Tuesday in Lisbon and Monday in Toronto, an invite that arrived before the booking. They stay in the parser count. They are not a third cause.
+
+**hint.** The booking-v3 form prints `MM/DD/YYYY` under the date field. The tenants on that form write the day first. Staff who follow the hint type the month first, and the form reads the date the tenant's way, so the swap happens at input. `causeOf` already separates this: a form report on an `MM` hint is `hint`, not `parser`. The parser fix does not touch it.
+
+<Callout kind="warn">
+One known ticket hid a second bug. The queued parser fix covers only the first row of the table.
+</Callout>
+
+## Since April
+
+<QueueTimeline ticket={4471} />
+
+## Tickets
+
+One issue in this repo per problem. Each issue states how many reports that problem covers. Those counts are the report counts in the table above, after the export's duplicate rows are collapsed to one id.
+
+<RenderStamp {signature} />
