@@ -2,7 +2,7 @@
 layout: runbook
 title: '#4471 · what the merge holds'
 owner: Oleksandr Gogilchyn
-status: open
+status: closed
 reviewed: 2026-11-24
 signature: 'v1.eyJzdWIiOiI2MjAwIiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTU1MzQ4NzEsImV4cCI6MTc5NTYyMTI3MX0.cDOlrwgF8NkIuIMA8HelirpdCoZQLcNv83niYU7N27c'
 ---
@@ -34,6 +34,15 @@ The table footnotes a few of those reports. The desk read them as a one-day move
 <Callout kind="warn">
 One known ticket hid a second bug. The queued parser fix covers only the first row of the table.
 </Callout>
+
+## What the desk did
+
+#4471 closed on 5 October.
+
+- **parser** fixed: `fix(dates): parse dd/mm for eu locales`
+- **hint** won't fix: the booking-v3 form was retired
+
+The two issues in this repo close the same way. The parser issue closes as done. The hint issue closes as not planned.
 
 ## Since April
 
